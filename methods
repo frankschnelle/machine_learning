@@ -1,4 +1,8 @@
 import pandas as pd
-import numpy as np
+from sklearn.preprocessing import OrdinalEncoder
 
-df = pd.read_excel(path)
+df = pd.DataFrame(['mittel', 'niedrig', 'hoch', 'mittel'], columns=['Aufwand'])
+oe = OrdinalEncoder(categories=[['niedrig', 'mittel', 'hoch']], dtype='int')
+oe.set_output(transform='pandas')
+df['Aufwand_kodiert'] = oe.fit_transform(df)
+print(df)
